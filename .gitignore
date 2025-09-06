@@ -1,0 +1,13 @@
+# Composer dependencies
+/vendor/
+
+# Environment variables
+.env
+
+# Project-specific ignores
+/db/*.sqlite
+/uploads/
+
+# macOS/Windows clutter
+.DS_Store
+Thumbs.db

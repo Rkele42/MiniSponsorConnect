@@ -1,0 +1,48 @@
+<div class="card">
+  <h3 style="margin-top:0">Çekim Talepleri</h3>
+  <?php if(!$my_wds): ?><p class="help">Henüz talep yok.</p><?php endif; ?>
+  <?php foreach($my_wds as $w): ?>
+    <?php
+      $status = $w['status'];
+      $statusText = $status;
+      $amountStyle = "background:#6b7280;color:#fff;"; // default gri
+      $flashClass = "";
+      if ($status === 'approved') {
+        $amountStyle = "background:#15803d;color:#fff;"; // yeşil
+        $statusText  = "ONAYLANDI";
+        $flashClass  = "flash-yes";
+      } elseif ($status === 'rejected') {
+        $amountStyle = "background:#b91c1c;color:#fff;"; // kırmızı
+        $statusText  = "REDDEDİLDİ";
+        $flashClass  = "flash-no";
+      } elseif ($status === 'pending') {
+        $amountStyle = "background:#0ea5e9;color:#001825;"; // mavi
+        $statusText  = "BEKLİYOR";
+      }
+    ?>
+    <div class="row" style="justify-content:space-between;margin:.25rem 0">
+      <span class="badge">#<?=$w['id']?></span>
+      <span class="price <?=$flashClass?>" style="padding:4px 8px;border-radius:6px;<?=$amountStyle?>">
+        <?=number_format((float)$w['amount'],2,',','.')?> TL
+      </span>
+      <span class="badge">komisyon: <?=number_format((float)$w['fee'],2,',','.')?> TL</span>
+      <span class="badge">durum: <?=$statusText?></span>
+    </div>
+    <div style="height:1px;background:#1f2937;margin:10px 0"></div>
+  <?php endforeach; ?>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  function flash(el,color){
+    let i=0;
+    let orig=el.style.backgroundColor;
+    let timer=setInterval(()=>{
+      el.style.backgroundColor=(i%2===0?color:orig);
+      if(++i>=6) clearInterval(timer);
+    },300);
+  }
+  document.querySelectorAll(".flash-yes").forEach(el=>flash(el,"#22c55e"));
+  document.querySelectorAll(".flash-no").forEach(el=>flash(el,"#ef4444"));
+});
+</script>

@@ -1,0 +1,12 @@
+<?php
+$__map = [
+  'pending'  => ['Beklemede',  'background:#f97316;color:#fff;'],
+  'approved' => ['Onaylandı',  'background:#15803d;color:#fff;'],
+  'rejected' => ['Reddedildi', 'background:#b91c1c;color:#fff;'],
+  'paid'     => ['Ödendi',     'background:#6d28d9;color:#fff;'],
+];
+$__st    = $w['status'] ?? '';
+$__text  = $__map[$__st][0] ?? $__st;
+$__style = $__map[$__st][1] ?? '';
+?>
+<span class="badge" style="<?= $__style ?>">Durum: <?= htmlspecialchars($__text) ?></span>

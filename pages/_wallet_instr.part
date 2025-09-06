@@ -1,0 +1,19 @@
+<?php
+// Admin’de ayarlı emanet IBAN / Alıcı Adı (güvence amaçlı tekrar oku)
+if (!isset($deposit_iban) || !isset($deposit_name)) {
+  $settings = [];
+  if (isset($pdo)) {
+    foreach ($pdo->query("SELECT key, value FROM site_settings") as $r) {
+      $settings[$r['key']] = $r['value'];
+    }
+  }
+  $deposit_iban = trim($settings['deposit_iban'] ?? '');
+  $deposit_name = trim($settings['company_name'] ?? ($settings['deposit_name'] ?? ''));
+}
+?>
+<div class="alert" style="background:#0b1220;border-color:#f59e0b;color:#e5e7eb">
+  <p class="help"><strong>ÖNEMLİ:</strong> Ödeme yaparken transfer <em>açıklamasına</em> kullanıcı adınızı yazmayı unutmayın
+    (örn: @<?= htmlspecialchars($user['username'] ?? 'kullanici') ?>).</p>
+  <p class="help"><strong>Alıcı Adı:</strong> <?= htmlspecialchars($deposit_name ?: '—') ?></p>
+  <p class="help"><strong>IBAN:</strong> <?= htmlspecialchars($deposit_iban ?: '—') ?></p>
+</div>
