@@ -1,13 +1,28 @@
-# Composer dependencies
-/vendor/
-
-# Environment variables
-.env
-
-# Project-specific ignores
-/db/*.sqlite
-/uploads/
-
-# macOS/Windows clutter
+# OS
 .DS_Store
 Thumbs.db
+
+# PHP, bağımlılıklar
+/vendor/
+/composer.lock
+
+# Node
+/node_modules/
+/pnpm-lock.yaml
+/package-lock.json
+/yarn.lock
+
+# Derlemeler, geçiciler
+/.idea/
+/.vscode/
+/dist/
+/build/
+/tmp/
+/backups/
+/trash_backups/
+
+# Veritabanı, sqlite dosyaları
+/db/
+/*.db
+*.sqlite
+*.sqlite3
