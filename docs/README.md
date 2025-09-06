@@ -1,0 +1,1 @@
+MiniSponsorConnect MVP - Çalışma Notları
